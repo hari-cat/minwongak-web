@@ -1,7 +1,13 @@
+import Header from "./layouts/Header";
 import AppRouter from "./routes";
 
 function App() {
-  return <AppRouter />;
+  return (
+    <>
+      <Header />
+      <AppRouter />
+    </>
+  );
 }
 
 export default App;
