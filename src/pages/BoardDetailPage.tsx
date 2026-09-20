@@ -34,6 +34,16 @@ const comments: Comment[] = [
   },
 ];
 
+const board = {
+  badgestats: "시설",
+  title: "지하주차장 천장에서 물이 계속 떨어집니다",
+  createdAt: "2026.09.17",
+  content:
+    "비가 많이 온 이후부터 지하주차장 B2층 일부 구역에서 물이 계속 떨어지고 있습니다. 차량 오염이나 미끄럼 사고가 걱정되니 누수 원인을 확인하고 조치해 주세요. 특히 출입구 근처 바닥이 젖어 있어서 차량이나 보행자가 미끄러질 위험도 있어 보입니다.",
+  readCount: 128,
+  likeCount: 24,
+};
+
 function BoardDetailPage() {
   const [comment, setComment] = useState("");
   const [replyingTo, setReplyingTo] = useState<number | null>(null);
@@ -42,53 +52,50 @@ function BoardDetailPage() {
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto w-full max-w-2xl px-4 py-6">
         {/* 뒤로가기 */}
-        <button
+        {/* <button
           type="button"
           className="mb-4 text-sm text-gray-500 hover:text-gray-900"
         >
           ← 목록으로
-        </button>
+        </button> */}
 
         {/* 게시물 */}
-        <article className="rounded-xl border bg-white p-6 shadow-sm">
+        <article className="rounded-xl p-6">
           <span className="inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-xs font-medium text-orange-600">
-            시설
+            {board.badgestats}
           </span>
 
           <h1 className="mt-3 text-2xl font-bold text-gray-900">
-            지하주차장 천장에서 물이 계속 떨어집니다
+            {board.title}
           </h1>
 
           {/* 게시물 정보 */}
           <div className="mt-4 flex items-center gap-2 text-sm text-gray-500">
             <span className="font-medium text-gray-700">김민수</span>
             <span className="text-gray-300">·</span>
-            <span>2026.09.17</span>
+            <span>{board.createdAt}</span>
             <span className="text-gray-300">·</span>
-            <span>조회 128</span>
+            <span>조회 {board.readCount}</span>
           </div>
 
           {/* 본문 */}
-          <div className="mt-8 min-h-60 whitespace-pre-wrap text-sm leading-7 text-gray-700">
-            비가 많이 온 이후부터 지하주차장 B2층 일부 구역에서 물이 계속
-            떨어지고 있습니다. 차량 오염이나 미끄럼 사고가 걱정되니 누수 원인을
-            확인하고 조치해 주세요. 특히 출입구 근처 바닥이 젖어 있어서 차량이나
-            보행자가 미끄러질 위험도 있어 보입니다.
+          <div className="mt-8 min-h-50 whitespace-pre-wrap text-sm leading-7 text-gray-700">
+            {board.content}
           </div>
 
           {/* 좋아요 */}
-          <div className="mt-6 flex justify-center border-t pt-5">
+          <div className="mt-6 flex justify-center pt-5">
             <button
               type="button"
               className="rounded-full border px-5 py-2 text-sm text-gray-600 hover:bg-gray-50"
             >
-              ♥ 좋아요 24
+              ♥ 좋아요 {board.likeCount}
             </button>
           </div>
         </article>
 
         {/* 댓글 */}
-        <section className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
+        <section className="mt-6 rounded-xl  p-6">
           <h2 className="text-lg font-semibold text-gray-900">
             댓글 {comments.length}
           </h2>
@@ -149,7 +156,7 @@ function BoardDetailPage() {
 
                     <button
                       type="button"
-                      className="rounded-lg bg-gray-900 px-3 py-2 text-xs font-medium text-white"
+                      className="rounded-lg bg-amber-800 px-3 py-2 text-xs font-medium text-white"
                     >
                       등록
                     </button>
