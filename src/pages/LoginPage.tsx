@@ -26,14 +26,14 @@ function LoginPage() {
     console.log(data);
     if (data.id === "test" && data.password === "894989") {
       localStorage.setItem("isLogin", "true"); // @todo 추후에 로그인 유지 방식 수정시 삭제
-      navigate("/main");
+      navigate("/board");
     }
   };
 
   useEffect(() => {
     const isLogin = localStorage.getItem("isLogin");
     if (isLogin === "true") {
-      navigate("/main");
+      navigate("/board");
     }
   }, []); // @todo 추후에 로그인 유지 방식 수정시 삭제
 
