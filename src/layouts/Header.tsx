@@ -7,7 +7,7 @@ function Header() {
     navigate(-1);
   };
   return (
-    <div className="text-center p-3 shadow-sm">
+    <div className="text-center p-3 shadow-sm bg-white">
       <div className="text-xl relative">
         <div className="absolute left-1 top-2" onClick={handlebackbutton}>
           <img src={leftArrow} width={"14px"} />
