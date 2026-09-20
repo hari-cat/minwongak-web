@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import BoardPage from "../pages/BoardPage";
 import MainLayout from "../layouts/MainLayout";
 import BoardDetailPage from "../pages/BoardDetailPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         element: <BoardDetailPage />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
