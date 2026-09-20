@@ -99,12 +99,12 @@ function BoardDetailPage() {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="댓글을 입력하세요."
-              className="min-w-0 flex-1 rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+              className="min-w-0 flex-1 rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
             />
 
             <button
               type="submit"
-              className="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700"
+              className="rounded-lg bg-amber-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-amber-700"
             >
               등록
             </button>
@@ -144,7 +144,7 @@ function BoardDetailPage() {
                   <div className="mt-3 ml-6 flex gap-2">
                     <input
                       placeholder="답글을 입력하세요."
-                      className="min-w-0 flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
+                      className="min-w-0 flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-amber-500"
                     />
 
                     <button
