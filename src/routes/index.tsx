@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 
 import LoginPage from "../pages/LoginPage";
-import MainPage from "../pages/MainPage";
+import BoardPage from "../pages/BoardPage";
 import MainLayout from "../layouts/MainLayout";
+import BoardDetailPage from "../pages/BoardDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -13,12 +14,12 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: "/main",
-        element: <MainPage />,
+        path: "board",
+        element: <BoardPage />,
       },
       {
-        path: "/board",
-        element: <></>,
+        path: "board/:boardId",
+        element: <BoardDetailPage />,
       },
     ],
   },
