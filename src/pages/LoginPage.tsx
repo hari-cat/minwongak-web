@@ -1,12 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 import z from "zod";
+import { useLogin } from "../hooks/useLogin";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 function LoginPage() {
   const loginSchema = z.object({
-    id: z.string().min(1, "아이디를 입력해주세요."),
+    username: z.string().min(1, "아이디를 입력해주세요."),
     password: z.string().min(1, "비밀번호를 입력해주세요."),
   });
 
@@ -21,21 +23,26 @@ function LoginPage() {
   });
 
   const navigate = useNavigate();
+  const loginMutation = useLogin();
+  const currentUserQuery = useCurrentUser();
+
+  if (currentUserQuery.isPending) {
+    return (
+      <div className="flex min-h-screen items-center justify-center text-gray-500">
+        로그인 상태를 확인하는 중입니다.
+      </div>
+    );
+  }
+
+  if (currentUserQuery.isSuccess) {
+    return <Navigate to="/board" replace />;
+  }
 
   const handleLogin = (data: LoginForm) => {
-    console.log(data);
-    if (data.id === "test" && data.password === "894989") {
-      localStorage.setItem("isLogin", "true"); // @todo 추후에 로그인 유지 방식 수정시 삭제
-      navigate("/board");
-    }
+    loginMutation.mutate(data, {
+      onSuccess: () => navigate("/board"),
+    });
   };
-
-  useEffect(() => {
-    const isLogin = localStorage.getItem("isLogin");
-    if (isLogin === "true") {
-      navigate("/board");
-    }
-  }, []); // @todo 추후에 로그인 유지 방식 수정시 삭제
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
@@ -73,10 +80,12 @@ function LoginPage() {
                 type="text"
                 placeholder="아이디를 입력하세요"
                 className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-blue-100"
-                {...register("id")}
+                {...register("username")}
               />
-              {errors.id && (
-                <p className="mt-1 text-sm text-red-500">{errors.id.message}</p>
+              {errors.username && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.username.message}
+                </p>
               )}
             </div>
 
@@ -102,11 +111,19 @@ function LoginPage() {
               )}
             </div>
 
+            {loginMutation.isError && (
+              <p role="alert" className="text-sm text-red-600">
+                로그인을 완료하지 못했습니다. 아이디와 비밀번호를 확인하거나
+                잠시 후 다시 시도해주세요.
+              </p>
+            )}
+
             <button
               type="submit"
-              className="w-full rounded-lg bg-amber-600 py-2.5 text-sm font-medium text-white hover:bg-amber-700"
+              disabled={loginMutation.isPending}
+              className="w-full rounded-lg bg-amber-600 py-2.5 text-sm font-medium text-white hover:bg-amber-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              로그인
+              {loginMutation.isPending ? "로그인 중..." : "로그인"}
             </button>
           </form>
         </div>
